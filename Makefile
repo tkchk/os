@@ -28,7 +28,7 @@ all: finale
 	$(NASM) -f bin $(@:.asm=.img) -o $@
 
 $(TARGET): $(OBJS)
-	$(shell nasm -f elf start.asm -o start.o)
+	$(NASM) -f elf start.asm -o start.o
 	$(CC) -m32 -nostdlib -nodefaultlibs -lgcc start.o $? -T linker.ld -o $(TARGET)
 
 finale:
