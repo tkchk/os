@@ -7,7 +7,7 @@
 // pointers in both strings, and since
 // the result of assignment equals
 // rvalue, we stop at null character
-char *strcpy(char *dest, char *src) {
+char *strcpy(char *dest, const char *src) {
     char *tmp = dest;
 
     while ((*dest++ = *src++) != 0);
