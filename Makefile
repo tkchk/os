@@ -28,8 +28,8 @@ all: finale
 	$(NASM) -f bin $(@:.asm=.img) -o $@
 
 $(TARGET): $(OBJS)
-	$(NASM) -f elf start.asm -o start.o
-	$(CC) -m32 -nostdlib -fno-asynchronous-unwind-tables -nodefaultlibs -lgcc start.o $? -T linker.ld -o $(TARGET)
+	$(NASM) -g -f elf start.asm -o start.o
+	$(CC) -g -m32 -nostdlib -fno-asynchronous-unwind-tables -nodefaultlibs -lgcc start.o $? -T linker.ld -o $(TARGET)
 
 finale:
 	$(shell cp $(TARGET) ./iso/boot/$(TARGET))
