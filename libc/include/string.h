@@ -7,7 +7,7 @@ int memcmp(const void *aptr, const void *bptr, size_t size);
 void *memset(void *bufptr, int value, size_t size);
 size_t strlen(const char*);
 char *strcat(char *dest, const char *src);
-char *strcpy(char *d, char *s);
+char *strcpy(char *d, const char *s);
 int strcmp(const char *s1, const char *s2);
 char *strncat(char *dest, const char *src, size_t n);
 char *strncpy(char *dest, const char *src, size_t n);
