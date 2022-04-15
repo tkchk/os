@@ -4,10 +4,10 @@
 #include "tty.h"
 #include "../libc/include/string.h"
 
-static const size_t VGA_WIDTH = 10;
-static const size_t VGA_HEIGHT = 5;
+static const size_t VGA_WIDTH = 80;
+static const size_t VGA_HEIGHT = 25;
 
-static uint16_t* const VGA_MEMORY = (uint16_t*)0x0b8000;
+static uint16_t* const VGA_MEMORY = (uint16_t*)0xb8000;
 
 size_t terminal_row;
 size_t terminal_column;
@@ -32,7 +32,7 @@ void terminal_initialize(void) {
     terminal_buffer = VGA_MEMORY;
     size_t y;
 
-    for (y = 0; y < VGA_WIDTH; y++) {
+    for (y = 0; y < VGA_HEIGHT; y++) {
         size_t x;
         for (x = 0; x < VGA_WIDTH; x++) {
             const size_t index = y * VGA_WIDTH + x;
@@ -120,14 +120,15 @@ print_c:
             amount = 1;
             while (format[amount] && format[amount] != '%') {
                 amount++;
-                print(format, amount);
-                format += amount;
-                written += amount;
-                continue;
             }
+            print(format, amount);
+            format += amount;
+            written += amount;
+            continue;
         }
 
         const char *format_begun_at = format;
+
         if (*(++format) == '%') {
             goto print_c;
         }
