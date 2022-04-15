@@ -29,7 +29,7 @@ all: finale
 
 $(TARGET): $(OBJS)
 	$(NASM) -f elf start.asm -o start.o
-	$(CC) -m32 -nostdlib -nodefaultlibs -lgcc start.o $? -T linker.ld -o $(TARGET)
+	$(CC) -m32 -nostdlib -fno-asynchronous-unwind-tables -nodefaultlibs -lgcc start.o $? -T linker.ld -o $(TARGET)
 
 finale:
 	$(shell cp $(TARGET) ./iso/boot/$(TARGET))
